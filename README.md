@@ -2,7 +2,7 @@
 <h1> Projet de M2 MIASHS sur la création d'un serveur web Utilisant de l'OpenData </h1> <br>
 Membres du groupe : Alaka Moulikatou, Cassan Mélodie, Jonathan Moreno, Karim Salah Salah, Emmanuelle Theron <br>
 <h2>Intitulé du projet : Evolution de la consommation électrique en fonction de la température </h2>
-Le but de ce projet est de  pouvoir récupérer un fichier au format souhaité (JSON, XML ou RDF/XML) qui regroupe les informations concernant deux sources de données <br>
+Le but de ce projet est de  pouvoir récupérer au format souhaité un fichier (JSON, XML ou RDF/XML) qui regroupe les informations concernant deux sources de données. <br>
 Nous avons choisi de lier deux sources de données ayant en commun leur identifiant de région pour pouvoir récupérer les informations de consommations électrique et de température spécifiques à une ou plusieurs régions région et à une période donnée.<br>
 <h2> Données utilisées : </h2>
   <li> Données énergétiques : <br>
