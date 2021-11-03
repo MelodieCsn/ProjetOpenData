@@ -6,14 +6,17 @@ const PORT = process.env.PORT || 3000;
 
 const FORMATS = ["application/json", "application/xml", "application/rdf+xml"];
 
-app.use(function(req, res, next) {
-  let format = req.get('Accept');
+let formatDemande; //variable contenant le format demandé. Assigné en premier et renvoie une erreur si le format n'est pas bon (json par défaut)
 
-  if (format === "*/*" || format === undefined || format === "") {
-    format = "application/json";
+app.use(function(req, res, next) {
+  formatDemande = req.get('Accept');
+
+  if (formatDemande === "*/*" || formatDemande === undefined || formatDemande === "") {
+    formatDemande = "application/json";
+    req.headers['accept'] = formatDemande;
   }
   
-  if (!FORMATS.includes(format)) {
+  if (!FORMATS.includes(formatDemande)) {
     let err = new Error("Mauvais format demandé dans le header \"Accept\".\nLes formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml")
     err.statusCode = 400
     next(err)
@@ -22,18 +25,19 @@ app.use(function(req, res, next) {
 });
 
 
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
   res.write('\nBienvenue sur petits emprunts bientôt en react !');
   res.end();
 });
 
-app.get('/regions', function (req, res) {
+app.get('/api/regions', function (req, res) {
+  let format = req.header('Accept');
   res.write(req.header('user-agent'));
   res.end();
 });
 
-app.get('/regions/:regionId', function (req, res) {
-  res.write(req.params.regionId);
+app.get('/api/regions/:regionId', function (req, res) {
+  res.write(req.params.regionId + "\n");
   res.write(req.query.city);
   res.end();
 });
