@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require('express');
+const js2xmlparser = require("js2xmlparser");
 const app = express();
 const PORT = process.env.PORT || 3000 ;
 //var Promise = require(promise)
@@ -9,9 +10,10 @@ const PORT = process.env.PORT || 3000 ;
 
 var fetchUrl = require("fetch").fetchUrl
   app.get('/conso/:region',  function (req, res) {
-    const region_bloup = req.params.region;
-    console.log(region_bloup);
-    const url_conso = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=consommation-quotidienne-brute-regionale&q=&rows=1000&sort=date_heure&facet=date_heure&facet=code_insee_region&facet=region&facet=consommation_brute_electricite_rte&refine.date=2016&refine.code_insee_region=${region_bloup}`
+    const region_param = req.params.region;
+    let date_var =  req.query.date
+    console.log(region_param);
+    const url_conso = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=consommation-quotidienne-brute-regionale&q=&rows=1000&sort=date_heure&facet=date_heure&facet=code_insee_region&facet=region&facet=consommation_brute_electricite_rte&refine.code_insee_region=${region_param}&refine.date=${date_var}`
 
     fetchUrl(url_conso,
       function(error, meta, body ){
@@ -19,7 +21,7 @@ var fetchUrl = require("fetch").fetchUrl
         //const fields = parsed.records[0].fields.code_insee_region;
         const records_conso =  parsed.records;
 
-        const url_temp = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=temperature-quotidienne-regionale&q=&rows=1000&sort=-date&facet=date&facet=region&refine.code_insee_region=${region_bloup}`
+        const url_temp = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=temperature-quotidienne-regionale&q=&rows=1000&sort=-date&facet=date&facet=region&refine.code_insee_region=${region_param}&refine.date=${date_var}`
 
         fetchUrl(url_temp,
           function(error2, meta2, body2 ){
@@ -32,8 +34,8 @@ var fetchUrl = require("fetch").fetchUrl
               temp: records_temp
             };
             let result_conso = {}; //json qu'on va remplir
-            result_conso.Region = region_bloup;
-            result_conso.Date = "coucou";
+            result_conso.Region = region_param;
+            result_conso.Periode = date_var;
             let conso = []
             records_conso.forEach(function(records_conso){
               records_temp.forEach(function(records_temp){
@@ -48,8 +50,18 @@ var fetchUrl = require("fetch").fetchUrl
               })
                 //else{console.log("Oh no")}
             result_conso.Features = conso;
+
+            // function converter(file, format) {
+            //   var finalfile = file;
+            //   if format=="xml":
+            //     finalfile = js2xmlparser.parse("person", obj);
+            //   return finalfile;
+            //   if format=="rdf":
+            //
+            // }
+
             res.json(result_conso);
-            // console.log(result_conso);
+            //console.log(js2xmlparser.parse("Bloupi", result_conso));
           })
           //res.json(parsed);
           //console.log(fields)
@@ -58,14 +70,6 @@ var fetchUrl = require("fetch").fetchUrl
    //res.send('Bienvenue sur petits emprunts bientôt en react !')
 });
 
-// app.get('/', function (req, res) {
-//   fetchUrl(url_temp,
-// function(error, meta, body ){
-//   let parsed2 = JSON.parse(body);
-//   let fields2 = parsed2.records[0].fields.code_insee_region;
-// console.log(fields2)});
-//   res.send('Bienvenue sur petits emprunts bientôt en react !');
-// });
 
 app.listen(PORT, function () {
   console.log('Petits emprunts lancé sur le port :' + PORT);
