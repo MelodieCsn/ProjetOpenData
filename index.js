@@ -10,7 +10,7 @@ const FORMATS = ["application/json", "application/xml", "application/rdf+xml"];
 
 let formatDemande; //variable contenant le format demandé. Assigné en premier et renvoie une erreur si le format n'est pas bon (json par défaut)
 let langageDemande; //variable contenant la langue demandée. Renvoie une erreur si la langue n'est pas le français
-let date; //variable contenant la date. Doit obligatoirement être renseignée
+let date; //variable contenant la date. 
 
 app.use(function(req, res, next) {
     formatDemande = req.get('Accept');
@@ -30,12 +30,6 @@ app.use(function(req, res, next) {
 
     if (!(langageDemande === undefined || langageDemande === "fr")) {
         let err = new Error("La seule langue supportée par l'API est le français. Merci de modifier le header \"Accept-Language\" par \"fr\", ou de le supprimer.");
-        err.statusCode = 400;
-        next(err);
-    }
-
-    if (date === undefined) {
-        let err = new Error("Le paramètre \"date\" doit être renseigné dans l'URL sous la forme \"YYYY\", \"YYYY-MM\", ou \"YYYY-MM-DD\"\nLa date doit être comprise entre le 2016-01-01 et aujourd'hui.");
         err.statusCode = 400;
         next(err);
     }
