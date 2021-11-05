@@ -26,6 +26,7 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
   <h2> Stratégie de croisement des deux sources de données : </h2>
   Les deux sources de données présentent des informations sur les régions françaises administratives et contiennent  au moins une mesure par jour. Nous avons donc, choisi de croiser ces données selon le code insee de la région et en fonction de la date. <br>
   
+  
 
 URL d'accès à l'API : <br>
  <h2> Description de l'API et de comment faire les requêtes : </h2>
@@ -36,3 +37,8 @@ URL d'accès à l'API : <br>
   <h2> Technologie et packages utilisés : </h2>
   <li> Le serveur a été codé en utilisant JavaScript. Il est hébergé sur Heroku. </li>
   <li> Nous avons utilisé les packages : node-js, express, fetch, js2xmlparser, promise. La version exacte des packeges utilisé est spécifié dans packge.json
+  
+  
+  
+  
+  ![Schéma](Shema_rel.png)
