@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/region/:regionId', function (req, res, next) {
+app.get('/regions/:regionId', function (req, res, next) {
     let regionId = req.params.regionId;
     let regionInseeCodeWithName = Object.keys(inseeRegions).find(key => inseeRegions[key] === regionId);
     let codeInseeToApi;
