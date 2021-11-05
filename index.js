@@ -1,14 +1,16 @@
+//importation des packages
 const express = require('express');
 const {fetchUrl} = require("fetch");
 const js2xmlparser = require("js2xmlparser");
 const app = express();
+//definition du port si on fait des tests en local
 const PORT = process.env.PORT || 3000;
-
+// definition des formats de donnees
 const FORMATS = ["application/json", "application/xml", "application/rdf+xml"];
 
 let formatDemande; //variable contenant le format demandé. Assigné en premier et renvoie une erreur si le format n'est pas bon (json par défaut)
-let langageDemande;
-let date;
+let langageDemande; //variable contenant la langue demandée. Renvoie une erreur si la langue n'est pas le français
+let date; //variable contenant la date. Doit obligatoirement être renseignée
 
 app.use(function(req, res, next) {
     formatDemande = req.get('Accept');
@@ -63,11 +65,12 @@ function doApi (regionId, date, format, res) {
     let endOfUrl;
     let resultConso = {}; //json qu'on va remplir
     let conso = [];
+    if (date != null){endOfUrl = `&refine.code_insee_region=${regionId}&refine.date=${date}`}
+    else{endOfUrl = `&refine.code_insee_region=${regionId}`}
 
-    endOfUrl = `&refine.code_insee_region=${regionId}&refine.date=${date}`
 
-    const urlConso = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=consommation-quotidienne-brute-regionale&q=&rows=1000&sort=date_heure&facet=date_heure&facet=code_insee_region&facet=region&facet=consommation_brute_electricite_rte` + endOfUrl;
-    const urlTemp = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=temperature-quotidienne-regionale&q=&rows=1000&sort=-date&facet=date&facet=region` + endOfUrl;
+    const urlConso = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=consommation-quotidienne-brute-regionale&q=&rows=10000&sort=date_heure&facet=date_heure&facet=code_insee_region&facet=region&facet=consommation_brute_electricite_rte` + endOfUrl;
+    const urlTemp = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=temperature-quotidienne-regionale&q=&rows=10000&sort=date&facet=date&facet=region` + endOfUrl;
 
     fetchUrl(urlConso,
         function(error, meta, body) {
