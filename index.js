@@ -1,16 +1,28 @@
-//importation des packages
 const express = require('express');
 const {fetchUrl} = require("fetch");
 const js2xmlparser = require("js2xmlparser");
 const app = express();
-//definition du port si on fait des tests en local
 const PORT = process.env.PORT || 3000;
-// definition des formats de donnees
+
 const FORMATS = ["application/json", "application/xml", "application/rdf+xml"];
+const inseeRegions = {
+    11: 'iledefrance',
+    24: 'centrevaldeloire',
+    27: 'bourgognefranchecomte',
+    28: 'normandie',
+    32: 'hautsdefrance',
+    44: 'grandest',
+    52: 'paysdelaloire',
+    53: 'bretagne',
+    75: 'nouvelleaquitaine',
+    76: 'occitanie',
+    84: 'auvergnerhonealpes',
+    93: 'provencealpescotedazur',
+}
 
 let formatDemande; //variable contenant le format demandé. Assigné en premier et renvoie une erreur si le format n'est pas bon (json par défaut)
-let langageDemande; //variable contenant la langue demandée. Renvoie une erreur si la langue n'est pas le français
-let date; //variable contenant la date. 
+let langageDemande;
+let date;
 
 app.use(function(req, res, next) {
     formatDemande = req.get('Accept');
@@ -37,14 +49,22 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/regions', function (req, res) {
-    res.end();
-});
+app.get('/region/:regionId', function (req, res, next) {
+    let regionId = req.params.regionId;
+    let regionInseeCodeWithName = Object.keys(inseeRegions).find(key => inseeRegions[key] === regionId);
+    let codeInseeToApi;
 
-app.get('/regions/:regionId', function (req, res) {
-    let region = req.params.regionId;
-
-    doApi(region, date, formatDemande, res);
+    if (inseeRegions[regionId] === undefined && regionInseeCodeWithName === undefined) {
+        let err = new Error("Le code région doit être un code INSEE de région de France métropolitaine (hors Corse) valide.\nLe nom de la région est également accepté, sans espace ni tirets.");
+        err.statusCode = 400;
+        res.status(err.statusCode).send(err.message);
+    } else if (inseeRegions[regionId] === undefined) {
+        codeInseeToApi = regionInseeCodeWithName
+        doApi(codeInseeToApi, date, formatDemande, res);
+    } else if (regionInseeCodeWithName === undefined) {
+        codeInseeToApi = regionId
+        doApi(codeInseeToApi, date, formatDemande, res);
+    }
 });
 
 app.use(function (err, req, res, next) {
@@ -59,8 +79,9 @@ function doApi (regionId, date, format, res) {
     let endOfUrl;
     let resultConso = {}; //json qu'on va remplir
     let conso = [];
-    if (date != null){endOfUrl = `&refine.code_insee_region=${regionId}&refine.date=${date}`}
-    else{endOfUrl = `&refine.code_insee_region=${regionId}`}
+    if (date != null) {
+        endOfUrl = `&refine.code_insee_region=${regionId}&refine.date=${date}`
+    } else { endOfUrl = `&refine.code_insee_region=${regionId}`}
 
 
     const urlConso = `https://opendata.reseaux-energies.fr/api/records/1.0/search/?dataset=consommation-quotidienne-brute-regionale&q=&rows=10000&sort=date_heure&facet=date_heure&facet=code_insee_region&facet=region&facet=consommation_brute_electricite_rte` + endOfUrl;
@@ -83,27 +104,27 @@ function doApi (regionId, date, format, res) {
                     recordsConso.forEach(function(recordsConso) {
                         recordsTemp.forEach(function(recordsTemp) {
                             if (recordsTemp.fields.date === recordsConso.fields.date) {
-                              conso.push( {Date_mesure : recordsConso.fields.date,
-                                          Region :{
-                                              Region_name : recordsConso.fields.region,
-                                              Region_code : recordsConso.fields.code_insee_region},
-                                              Temperature : {
-                                                    Temperature_moyenne : recordsTemp.fields.tmoy,
-                                                    Temperature_minimale : recordsTemp.fields.tmin,
-                                                    Temperature_maximale : recordsTemp.fields.tmax
-                                                  },
-                                                  Consommation_energetique : {
-                                                    Conso_elec : recordsConso.fields.consommation_brute_electricite_rte,
-                                                    Conso_gaz : recordsConso.fields.consommation_brute_gaz_totale,
-                                                  }
-                                          })
-                                }
+                                conso.push( {Date_mesure : recordsConso.fields.date,
+                                    Region :{
+                                        Region_name : recordsConso.fields.region,
+                                        Region_code : recordsConso.fields.code_insee_region},
+                                    Temperature : {
+                                        Temperature_moyenne : recordsTemp.fields.tmoy,
+                                        Temperature_minimale : recordsTemp.fields.tmin,
+                                        Temperature_maximale : recordsTemp.fields.tmax
+                                    },
+                                    Consommation_energetique : {
+                                        Conso_elec : recordsConso.fields.consommation_brute_electricite_rte,
+                                        Conso_gaz : recordsConso.fields.consommation_brute_gaz_totale,
+                                    }
+                                })
+                            }
                         })
                     })
 
                     resultConso.Mesure = conso;
 
-                    var xml_rdf =  `<?xml version="1.0"?>\n`
+                    let xml_rdf = `<?xml version="1.0"?>\n`;
                     xml_rdf += `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns"
                             xmlns:sql="http://ns.inria.fr/ast/%22%3E"
                             xmlns:oml = "http://def.seegrid.csiro.au/ontology/om/om-lite"
@@ -116,42 +137,41 @@ function doApi (regionId, date, format, res) {
                             xmlns:ddesc= "https://w3id.org/arco/ontology/denotative-description/"
                             xmlns:shw = "http://paul.staroch.name.thesis/SmartHomeWeather.owl">\n`
 
-                    recordsConso.forEach(function(recordsConso){
-                      recordsTemp.forEach(function(recordsTemp){
-                        if (recordsTemp.fields.date == recordsConso.fields.date){
-                          xml_rdf += `\t<oml:MeasureObject>\n`
-                          xml_rdf += `\t\t<dc:Publisher rdf:property = "http://purl.org/dc/elements/1.1/publisher">\n`
-                          xml_rdf += `\t\t\t<dc:Agent rdf:about="https://opendata.reseaux-energies.fr/api/records/1.0/search/"/>\n`
-                          xml_rdf += `\t\t</dc:Publisher>\n`
-                          xml_rdf += `\t\t<lsweb:hasDate>` + recordsConso.fields.date + `</lsweb:hasDate>\n`
-                          xml_rdf += `\t\t<s4wear:isLocated>\n`
-                          xml_rdf += `\t\t\t<dc:Location>\n`
-                          xml_rdf += `\t\t\t\t<igeo:codeRegion rdf:datatype = "http://www.w3.org/2001/XMLSchema#int">` + recordsConso.fields.code_insee_region + `</igeo:codeRegion>\n`
-                          xml_rdf += `\t\t\t\t<place:Region rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">` + recordsConso.fields.region + `</place:Region>\n`
-                          xml_rdf += `\t\t\t</dc:Location>\n`
-                          xml_rdf += `\t\t</s4wear:isLocated>\n`
-                          xml_rdf += `\t\t<ddesc:hasMeasurement>\n`
-                          xml_rdf += `\t\t\t<s4bldg:nominalPowerConsumption rdf:datatype = "http://www.w3.org/2001/XMLSchema#int">` + recordsConso.fields.consommation_brute_electricite_rte + `</s4bldg:nominalPowerConsumption>\n`
-                          xml_rdf += `\t\t</ddesc:hasMeasurement>\n`
-                          xml_rdf += `\t\t<shw:hasTemperatureValue>\n`
-                          xml_rdf += `\t\t\t<shw:Temperature>\n`
-                          xml_rdf += `\t\t\t\t<sql:avg rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmoy + `</sql:avg>\n`
-                          xml_rdf += `\t\t\t\t<sql:min rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmin + `</sql:min>\n`
-                          xml_rdf += `\t\t\t\t<sql:max rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmax + `</sql:max>\n`
-                          xml_rdf += `\t\t\t</shw:Temperature>\n`
-                          xml_rdf += `\t\t</shw:hasTemperatureValue>\n`
-                          xml_rdf += `\t</oml:MeasureObject>\n`
-
-                        }
-                      })
-                    })
-                      xml_rdf += `</rdf:RDF>`
-
                     if (format === "application/json") {
                         res.json(resultConso);
                     } else if (format === "application/xml") {
                         res.send(js2xmlparser.parse("regions", resultConso));
                     } else if (format === "application/rdf+xml") {
+                        recordsConso.forEach(function(recordsConso){
+                            recordsTemp.forEach(function(recordsTemp){
+                                if (recordsTemp.fields.date === recordsConso.fields.date){
+                                    xml_rdf += `\t<oml:MeasureObject>\n`
+                                    xml_rdf += `\t\t<dc:Publisher rdf:property = "http://purl.org/dc/elements/1.1/publisher">\n`
+                                    xml_rdf += `\t\t\t<dc:Agent rdf:about="https://opendata.reseaux-energies.fr/api/records/1.0/search/"/>\n`
+                                    xml_rdf += `\t\t</dc:Publisher>\n`
+                                    xml_rdf += `\t\t<lsweb:hasDate>` + recordsConso.fields.date + `</lsweb:hasDate>\n`
+                                    xml_rdf += `\t\t<s4wear:isLocated>\n`
+                                    xml_rdf += `\t\t\t<dc:Location>\n`
+                                    xml_rdf += `\t\t\t\t<igeo:codeRegion rdf:datatype = "http://www.w3.org/2001/XMLSchema#int">` + recordsConso.fields.code_insee_region + `</igeo:codeRegion>\n`
+                                    xml_rdf += `\t\t\t\t<place:Region rdf:datatype = "http://www.w3.org/2001/XMLSchema#string">` + recordsConso.fields.region + `</place:Region>\n`
+                                    xml_rdf += `\t\t\t</dc:Location>\n`
+                                    xml_rdf += `\t\t</s4wear:isLocated>\n`
+                                    xml_rdf += `\t\t<ddesc:hasMeasurement>\n`
+                                    xml_rdf += `\t\t\t<s4bldg:nominalPowerConsumption rdf:datatype = "http://www.w3.org/2001/XMLSchema#int">` + recordsConso.fields.consommation_brute_electricite_rte + `</s4bldg:nominalPowerConsumption>\n`
+                                    xml_rdf += `\t\t</ddesc:hasMeasurement>\n`
+                                    xml_rdf += `\t\t<shw:hasTemperatureValue>\n`
+                                    xml_rdf += `\t\t\t<shw:Temperature>\n`
+                                    xml_rdf += `\t\t\t\t<sql:avg rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmoy + `</sql:avg>\n`
+                                    xml_rdf += `\t\t\t\t<sql:min rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmin + `</sql:min>\n`
+                                    xml_rdf += `\t\t\t\t<sql:max rdf:datatype = "http://www.w3.org/2001/XMLSchema#float" >` + recordsTemp.fields.tmax + `</sql:max>\n`
+                                    xml_rdf += `\t\t\t</shw:Temperature>\n`
+                                    xml_rdf += `\t\t</shw:hasTemperatureValue>\n`
+                                    xml_rdf += `\t</oml:MeasureObject>\n`
+
+                                }
+                            })
+                        })
+                        xml_rdf += `</rdf:RDF>`
                         res.send(xml_rdf);
                     }
                 })
