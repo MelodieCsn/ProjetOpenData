@@ -44,8 +44,7 @@ URL d'accès à l'API : <br>
 </code></pre></div> </li>
     
   <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : 
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  
-"><pre><code> https://projectopendata.herokuapp.com/regions/84
+    <div class="snippet-clipboard-content position-relative overflow-auto"><pre><code> https://projectopendata.herokuapp.com/regions/84
 </code></pre></div> </li>
     
  <div>   
