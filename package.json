@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/MelodieCsn/ProjetOpenData#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "js2xmlparser": "^4.0.2"
   }
 }
