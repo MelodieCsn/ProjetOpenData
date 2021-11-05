@@ -31,7 +31,9 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
 URL d'accès à l'API : <br>
  <h2> Description de l'API et de comment faire les requêtes : </h2>
   <li> Structure du RDF/XML proposé en sortie de l'API :
-
+  
+  ![Schéma](Shema_rel.png)
+  
   Il est possible de demander l'export des données au format RDF/XML. La construction de celui ci répond au schéma relationnel ci dessous. Les vocabulaires utilisés sont des vocabulaires validés par la commmunauté et disponible à cette adresse : <href>https://lov.linkeddata.es/dataset/lov/</href> <br>
   L'export RDF/XML de notre API a été validé avec l'outil RDF Validator du W3C <href>https://www.w3.org/RDF/Validator/</href> <br>
   
@@ -39,7 +41,7 @@ URL d'accès à l'API : <br>
   <li> Le serveur a été codé en utilisant JavaScript. Il est hébergé sur Heroku. </li>
   <li> Nous avons utilisé les packages : node-js, express, fetch, js2xmlparser, promise. La version exacte des packeges utilisé est spécifié dans packge.json
 
-  ![Schéma](Shema_rel.png)  
+    
   
   
   
