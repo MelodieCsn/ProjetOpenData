@@ -33,26 +33,24 @@ URL d'accès à l'API : <br>
   <li> L'adresse du serveur déployé est disponible à cette adresse : <href> https://projectopendata.herokuapp.com/ </href>
   <h3> Exemples de requête : </h3>
   
-<li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 :
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
-"><pre><code>  https://projectopendata.herokuapp.com/regions/76/?date=2018
-</code></pre></div> </li>
+<li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 : <br>
+https://projectopendata.herokuapp.com/regions/76/?date=2018
+</li>
     
- <li> Exemple 2: Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : 
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
-"><pre><code>  https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31
-</code></pre></div> </li>
+ <li> Exemple 2: Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : <br>
+ https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31
+ </li>
     
-  <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : 
-    <div class="snippet-clipboard-content position-relative overflow-auto"><pre><code> https://projectopendata.herokuapp.com/regions/84
-</code></pre></div> </li>
+  <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : <br>
+  https://projectopendata.herokuapp.com/regions/84
+  </li>
     
  <div>   
     <h3> Informations dans le header </h3>
     
-    Les langages demandés doivent être précisés dans le header avec la clé Accept-Language. (Seul le fr est supporté, l'erreur suivante sera renvoyée si un autre langage est demandé : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer." <br>
+    <li>Les langages demandés doivent être précisés dans le header avec la clé Accept-Language. (Seul le fr est supporté, l'erreur suivante sera renvoyée si un autre langage est demandé : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer." </li>
     
-     Le format de sortie accepté doit également être précisé dans le header avec la clé Accept. Les valeurs de formats supportés sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. si le format n'est pas supporté, l'erreur "Mauvais format demandé dans le header "Accept". Les formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml" sera renvoyée.
+     <li>Le format de sortie accepté doit également être précisé dans le header avec la clé Accept. Les valeurs de formats supportés sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. si le format n'est pas supporté, l'erreur "Mauvais format demandé dans le header "Accept". Les formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml" sera renvoyée.</li>
  </div> 
    <h3> Structure du RDF/XML proposé en sortie de l'API : </h3>
   
