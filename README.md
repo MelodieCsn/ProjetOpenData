@@ -30,15 +30,16 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
 URL d'accès à l'API : <br>
  <h2> Description de l'API : </h2>
   <li> L'adresse du serveur déployé est disponible à cette adresse : <href> https://projectopendata.herokuapp.com/ </href>
+  
+   <div>   
+     <li>L'URL de la requête est la suivante : /regions/:regionId, où :regionId doit être remplacé soit par le code INSEE de la région voulue, soit son nom complet (sans espaces, tirets ou accents) en minuscule. Il est également possible de préciser une période, avec le paramètre date qui pourra concerncer une année (date=YYYY), un mois (date=YYYY-MM), ou un jour spécifique (date=YYYY-MM-DD), où YYYY représente l'année sur 4 caractères, MM le mois sur 2 caractères et DD le jour sur 2 caractères.<br>
+  En cas de mauvais identifiant ou nom de région renseigné, une erreur 400 sera renvoyée de la forme suivante : "Le code région doit être un code INSEE de région de France métropolitaine (hors Corse) valide. Le nom de la région est également accepté, sans espace ni tirets."</li> <br>
+</div>
   <h3> Exemples de requête : </h3>
   
 </li>
 </div>
- <div>   
-     <li>L'URL de la requête est la suivante : /regions/:regionId, où :regionId doit être remplacé soit par le code INSEE de la région voulue, soit son nom complet (sans espaces, tirets ou accents) en minuscule. Il est également possible de préciser une période, avec le paramètre date qui pourra concerncer une année (date=YYYY), un mois (date=YYYY-MM), ou un jour spécifique (date=YYYY-MM-DD), où YYYY représente l'année sur 4 caractères, MM le mois sur 2 caractères et DD le jour sur 2 caractères.<br>
-  En cas de mauvais identifiant ou nom de région renseigné, une erreur 400 sera renvoyée de la forme suivante : "Le code région doit être un code INSEE de région de France métropolitaine (hors Corse) valide. Le nom de la région est également accepté, sans espace ni tirets."</li> <br>
-</div>
-  
+
 <li> Exemple 1: Les données de consommation électrique et de température dans la région Occitanie pour l'ensemble de l'année 2018 : <br>
 https://projectopendata.herokuapp.com/regions/occitanie/?date=2018
 </li>
