@@ -16,8 +16,10 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
 
 </li>
   <li> Données météorologiques : <br>
-  Ce jeu de données présente les températures minimales, maximales et moyennes quotidiennes (en degré celsius), par région administrative française, du 1er janvier 2016 à aujourd'hui. Il est basé sur les mesures officielles du réseau de stations météorologiques françaises. La mise à jour de ce jeu de données est mensuelle. Les données sont accessibles via ce lien : <br>
-  <href>https://opendata.reseaux-energies.fr/explore/dataset/consommation-quotidienne-brute-regionale/table/?disjunctive.code_insee_region&disjunctive.region&sort=date</href> <br>
+  Ce jeu de données présente les températures minimales, maximales et moyennes quotidiennes (en degré celsius), par région administrative française, du 1er janvier 2016 à aujourd'hui. Il est basé sur les mesures officielles du réseau de stations météorologiques françaises. La mise à jour de ce jeu de données est mensuelle. 
+  Ces données sont sous la Licence Ouverte v2.0 (Etalab).
+  Ces données sont produites par Weathernews France. Elles sont hébérgées par Open Data Reseaux Energie<br>Les données sont accessibles via ce lien : <br>
+  <href>https://opendata.reseaux-energies.fr/explore/dataset/temperature-quotidienne-regionale/information/?disjunctive.region&sort=-date</href> <br>
 
 </li>
 
