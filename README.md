@@ -29,7 +29,11 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
   
 
 URL d'accès à l'API : <br>
- <h2> Description de l'API et de comment faire les requêtes : </h2>
+ <h2> Description de l'API : </h2>
+  <li> L'adresse du serveur déployé est disponible à cette adresse : <href> https://projectopendata.herokuapp.com/ </href>
+  <h3> Exemple de requete : </h3>
+  <li> Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : <br>
+    Exemple : https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31 
   <li> Structure du RDF/XML proposé en sortie de l'API :
   
   ![Schéma](Shema_rel.png)
