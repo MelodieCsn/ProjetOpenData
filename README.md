@@ -47,7 +47,7 @@ https://projectopendata.herokuapp.com/regions/occitanie/?date=2018
  https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31
  </li>
     
-  <li> Exemple 3: Les données de consommation électrique et de température dans la région Auvergne-Rhône-Alpes pour les derniers mois : <br>
+  <li> Exemple 3: Les données de consommation électrique et de température dans la région Auvergne-Rhône-Alpes pour les derniers résultats (jusqu'à une limite de 10000 résultats) : <br>
   https://projectopendata.herokuapp.com/regions/84
   </li>
 <div>    
