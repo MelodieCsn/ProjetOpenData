@@ -32,24 +32,30 @@ URL d'accès à l'API : <br>
   <li> L'adresse du serveur déployé est disponible à cette adresse : <href> https://projectopendata.herokuapp.com/ </href>
   <h3> Exemples de requête : </h3>
   
-<li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 : <br>
-https://projectopendata.herokuapp.com/regions/76/?date=2018
+</li>
+</div>
+ <div>   
+     <li>L'URL de la requête est la suivante : /regions/:regionId, où :regionId doit être remplacé soit par le code INSEE de la région voulue, soit son nom complet (sans espaces, tirets ou accents) en minuscule. Il est également possible de préciser une période, avec le paramètre date qui pourra concerncer une année (date=YYYY), un mois (date=YYYY-MM), ou un jour spécifique (date=YYYY-MM-DD), où YYYY représente l'année sur 4 caractères, MM le mois sur 2 caractères et DD le jour sur 2 caractères.<br>
+  En cas de mauvais identifiant ou nom de région renseigné, une erreur 400 sera renvoyée de la forme suivante : "Le code région doit être un code INSEE de région de France métropolitaine (hors Corse) valide. Le nom de la région est également accepté, sans espace ni tirets."</li>
+</div>
+  
+<li> Exemple 1: Les données de consommation électrique et de température dans la région Occitanie pour l'ensemble de l'année 2018 : <br>
+https://projectopendata.herokuapp.com/regions/occitanie/?date=2018
 </li>
     
- <li> Exemple 2: Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : <br>
+ <li> Exemple 2: Les données de consommation électrique et de température dans la région nouvelle Aquitaine le 31 décembre 2017 : <br>
  https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31
  </li>
     
-  <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : <br>
+  <li> Exemple 3: Les données de consommation électrique et de température dans la région Auvergne-Rhône-Alpes pour les derniers mois : <br>
   https://projectopendata.herokuapp.com/regions/84
   </li>
 <div>    
  <h3> Informations dans le header </h3>
  </div>   
- <li>Les langages demandés doivent être précisés dans le header avec la clé Accept-Language. (Seul le fr est supporté, l'erreur suivante sera renvoyée si un autre langage est demandé : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer." </li>
+ <li>Les langues demandées doivent être précisées dans le header avec la clé "Accept-Language". (Seul le fr est supporté, l'erreur 400 suivante sera renvoyée si une autre langue est demandée : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer." </li>
  <div>   
-     <li>Le format de sortie accepté doit également être précisé dans le header avec la clé Accept. Les valeurs de formats supportés sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. si le format n'est pas supporté, l'erreur "Mauvais format demandé dans le header "Accept". Les formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml" sera renvoyée.</li>
-</div>
+     <li>Le format de sorti accepté doit également être précisé dans le header avec la clé "Accept". Les valeurs de format supportées sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. Si le format n'est pas supporté, l'erreur 400 "Mauvais format demandé dans le header "Accept". Les formats acceptés sont: application/json (valeur par défaut), application/xml, application/rdf+xml" sera renvoyée.
    <h3> Structure du RDF/XML proposé en sortie de l'API : </h3>
   
   ![Schéma](Shema_rel.png)
@@ -59,7 +65,7 @@ https://projectopendata.herokuapp.com/regions/76/?date=2018
   
   <h2> Technologie et packages utilisés : </h2>
   <li> Le serveur a été codé en utilisant JavaScript. Il est hébergé sur Heroku. </li>
-  <li> Nous avons utilisé les packages : node-js, express, fetch, js2xmlparser, promise. La version exacte des packeges utilisé est spécifié dans packge.json
+  <li> Nous avons utilisé les packages : node-js, express, fetch, js2xmlparser, promise. La version exacte des packages utilisés est spécifiée dans packge.json
 
     
   
