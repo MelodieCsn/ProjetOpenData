@@ -50,8 +50,11 @@ URL d'accès à l'API : <br>
     
     
     <h3> Informations dans le header </h3>
-    <li>Les langages demandés doivent être précisés dans le header avec la clé Accept-Language. (Seul le fr est supporté, l'erreur suivante sera renvoyée si un autre langage est demandé : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer."
-    <li> Le format de sortie accepté doit également être précisé dans le header avec la clé Accept. Les valeurs de formats supportés sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. si le format n'est pas supporté, l'erreur "Mauvais format demandé dans le header "Accept". Les formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml" sera renvoyée.
+    
+    <li>Les langages demandés doivent être précisés dans le header avec la clé Accept-Language. (Seul le fr est supporté, l'erreur suivante sera renvoyée si un autre langage est demandé : "La seule langue supportée par l'API est le français. Merci de modifier le header "Accept-Language" par "fr", ou de le supprimer." </li>
+    
+    <li> Le format de sortie accepté doit également être précisé dans le header avec la clé Accept. Les valeurs de formats supportés sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. si le format n'est pas supporté, l'erreur "Mauvais format demandé dans le header "Accept". Les formats acceptés sont:\n- application/json (valeur par défaut)\n- application/xml\n- application/rdf+xml" sera renvoyée.</li>
+   
    <h3> Structure du RDF/XML proposé en sortie de l'API : </h3>
   
   ![Schéma](Shema_rel.png)
