@@ -1,22 +1,11 @@
 {
-  "name": "package.json",
-  "version": "1.0.0",
-  "description": "projetOpenData",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MelodieCsn/ProjetOpenData.git"
-  },
-  "author": "MCassanandCie",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MelodieCsn/ProjetOpenData/issues"
-  },
-  "homepage": "https://github.com/MelodieCsn/ProjetOpenData#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "-": "^0.0.1",
+    "express": "^4.17.1",
+    "fetch": "^1.1.0",
+    "js2xmlparser": "^4.0.2",
+    "node-fetch": "^3.0.0",
+    "promise": "^8.1.0",
+    "save": "^2.4.0"
   }
 }
