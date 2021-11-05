@@ -32,18 +32,19 @@ URL d'accès à l'API : <br>
  <h2> Description de l'API : </h2>
   <li> L'adresse du serveur déployé est disponible à cette adresse : <href> https://projectopendata.herokuapp.com/ </href>
   <h3> Exemples de requête : </h3>
-  <li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 :
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  Exemple: https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/FORMAT
+  
+<li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 :
+    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
 "><pre><code>  https://projectopendata.herokuapp.com/regions/76/?date=2018
 </code></pre></div>
     
   <li> Exemple 2: Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : <br>
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  Exemple: https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/FORMAT
+    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
 "><pre><code>  https://projectopendata.herokuapp.com/regions/75/?date=2017-12-31
 </code></pre></div>
     
     <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : <br>
-    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  Exemple: https://projetodata.herokuapp.com/covidAirquality/COUNTRY/YYYY-MM-DD/FORMAT
+    <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  
 "><pre><code> https://projectopendata.herokuapp.com/regions/84
 </code></pre></div>
     
