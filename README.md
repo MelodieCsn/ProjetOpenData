@@ -59,7 +59,7 @@ https://projectopendata.herokuapp.com/regions/occitanie/?date=2018
      <li>Le format de sorti accepté doit également être précisé dans le header avec la clé "Accept". Les valeurs de format supportées sont : "application/json", "application/xml", "application/rdf+xml". Par défaut, un format json sera renvoyé. Si le format n'est pas supporté, l'erreur 400 "Mauvais format demandé dans le header "Accept". Les formats acceptés sont: application/json (valeur par défaut), application/xml, application/rdf+xml" sera renvoyée.
    <h3> Structure du RDF/XML proposé en sortie de l'API : </h3>
   
-  ![Schéma](Schema_rel.png)
+  ![Schéma](Schema_relationelle.png)
   
   Il est possible de demander l'export des données au format RDF/XML. La construction de celui ci répond au schéma relationnel ci dessus. Les vocabulaires utilisés sont des vocabulaires validés par la commmunauté et disponible à cette adresse : <href>https://lov.linkeddata.es/dataset/lov/</href> <br>
   L'export RDF/XML de notre API a été validé avec l'outil RDF Validator du W3C <href>https://www.w3.org/RDF/Validator/</href> <br>
