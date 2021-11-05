@@ -1,10 +1,10 @@
 # ProjetOpenData
-<h1> Projet de M2 MIASHS sur la création d'un serveur web Utilisant de l'OpenData </h1> <br>
+<h1> Projet de M2 MIASHS sur la création d'un serveur web utilisant de l'OpenData </h1> <br>
 Membres du groupe : Alaka Moulikatou, Cassan Mélodie, Moreno Jonathan, Salah Salah Karim , Theron Emmanuelle, klein Alexandre  <br>
 <h2>Intitulé du projet : Evolution de la consommation électrique en fonction de la température </h2>
 L'objectif de ce projet est de mieux comprendre comment les variations de températures impacte la consommation globale d'energie (éléctricité et/ou gaz) <br>
 Pour cela, le but est de  pouvoir récupérer au format souhaité un fichier (JSON, XML ou RDF/XML) qui regroupe les informations concernant deux sources de données. <br>
-Nous avons choisi de lier deux sources de données ayant en commun leur identifiant de région pour pouvoir récupérer les informations de consommations électrique et de température spécifiques à une ou plusieurs régions région et à une période donnée.<br>
+Nous avons choisi de lier deux sources de données ayant en commun leur identifiant de région pour pouvoir récupérer les informations de consommations électrique, de température et de budget pour chaque habitant spécifiques à une ou plusieurs régions et à une période donnée.<br>
 <h2> Données utilisées : </h2>
   <li> Données énergétiques : <br>
   Ce jeu de données présente les courbes de consommation régionale d’électricité (par demi-heure en MW) et de gaz (par heure en MW PCS 0°C).
@@ -22,7 +22,9 @@ Périmètre électricité : France métropolitaine hors Corse. Les années 2013 
   <href>https://opendata.reseaux-energies.fr/explore/dataset/temperature-quotidienne-regionale/information/?disjunctive.region&sort=-date</href> <br>
 
 </li>
-
+<li> Données de budget par habitants par région : <br>
+  Les comptes des régions 2012-2020 présentent les principaux agrégats des comptes des régions pour la période 2012-2020. Le calcul des agrégats a été réalisé par l'OFGL à partir des données des balances comptables des régions publiées par la DGFiP.<br> Les données sont disponibles via ce lien : 
+  <href>https://www.data.gouv.fr/fr/datasets/comptes-des-regions-2012-2020/</href>
   <h2> Stratégie de croisement des deux sources de données : </h2>
   Les deux sources de données présentent des informations sur les régions françaises administratives et contiennent  au moins une mesure par jour. Nous avons donc, choisi de croiser ces données selon le code insee de la région et en fonction de la date. <br>
   
