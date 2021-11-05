@@ -36,7 +36,7 @@ URL d'accès à l'API : <br>
 <li> Exemple 1: Les données de consommation énergétiques et de température dans la région Occitanie pour l'ensemble de l'année 2018 :
     <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
 "><pre><code>  https://projectopendata.herokuapp.com/regions/76/?date=2018
-</code></pre></div>
+</code></pre></div> </li>
     
  <li> Exemple 2: Les données de consommation énergétiques et de température dans la région nouvelle aquitaine le 31 décembre 2017 : 
     <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content=" 
@@ -46,7 +46,7 @@ URL d'accès à l'API : <br>
   <li> Exemple 3: Les données de consommation énergétiques et de température dans la région Auvergne Rhône-Alpes pour toutes les dates disponibles : 
     <div class="snippet-clipboard-content position-relative overflow-auto" data-snippet-clipboard-copy-content="  
 "><pre><code> https://projectopendata.herokuapp.com/regions/84
-</code></pre></div>
+</code></pre></div> </li>
     
     
     <h3> Informations dans le header </h3>
